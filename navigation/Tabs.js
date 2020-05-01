@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from "../screens/Home";
@@ -9,12 +9,22 @@ import Mypage from "../screens/Mypage";
 
 const Tabs = createBottomTabNavigator();
 
-export default () => (
-    <Tabs.Navigator>
-        <Tabs.Screen name="Home" component={Home}/>
-        <Tabs.Screen name="Post" component={Post}/>
-        <Tabs.Screen name="Search" component={Search}/>
-        <Tabs.Screen name="Activity" component={Activity}/>
-        <Tabs.Screen name="Mypage" component={Mypage}/>
-    </Tabs.Navigator>
-);
+const getHeaderName = route => 
+    route?.state?.routeNames[route.state.index] || "Home";
+
+export default ({navigation, route}) => {
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: getHeaderName(route)
+        });
+    }, [route])
+    return(
+        <Tabs.Navigator>
+            <Tabs.Screen name="Home" component={Home}/>
+            <Tabs.Screen name="Post" component={Post}/>
+            <Tabs.Screen name="Search" component={Search}/>
+            <Tabs.Screen name="Activity" component={Activity}/>
+            <Tabs.Screen name="Mypage" component={Mypage}/>
+        </Tabs.Navigator>
+    );
+};
