@@ -45,7 +45,7 @@ const Desc = styled.Text`
 const Button = styled.View`
     margin-top: 10px;
     background-color: #e74c3c;
-    padding: 10px;
+    padding: 7px 10px;
     border-radius: 3px;
 `;
 
@@ -63,7 +63,7 @@ const Slide = ({id, title, desc, url, thumbnail, uploadDate, tag}) => (
         <Content>
             <Poster url={apiImage(thumbnail)}/>
             <Data>
-                <Title>{title.slice(0, 30)}</Title>
+                <Title>{title.length > 40 ? `${title.slice(0, 40)}...` : title}</Title>
                 {/* {tag.map((item, index) => {
                     <TagItem key={index}>
                         {item}
@@ -72,7 +72,7 @@ const Slide = ({id, title, desc, url, thumbnail, uploadDate, tag}) => (
                 <Desc>{desc.slice(0, 120)}</Desc>
                 <TouchableOpacity>
                     <Button>
-                        <ButtonText>View Detail</ButtonText>
+                        <ButtonText>View Details</ButtonText>
                     </Button>
                 </TouchableOpacity>
             </Data>
