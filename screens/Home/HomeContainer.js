@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Button} from 'react-native';
-import {lectureApi} from '../api';
+import {lectureApi} from '../../api';
 
 export default () => {
     const [lecures, setLectures] = useState({
