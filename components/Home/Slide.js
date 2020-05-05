@@ -9,7 +9,6 @@ const {width: WIDTH, height: HEIGHT} = Dimensions.get("screen");
 const Container = styled.View`
     width: ${WIDTH}px;
     height: ${HEIGHT / 4}px;
-    background-color: red;
 `;
 
 const BG = styled.Image`
@@ -17,19 +16,18 @@ const BG = styled.Image`
     height: 100%;
 `;
 
-const Slide = ({id, title, desc, url, thumbnail}) => (
+const Slide = ({id, title, desc, url, thumbnail, uploadDate}) => (
     <Container>
-        <BG source={{ url: apiImage(thumbnail) }} />
+        <BG source={{ uri: apiImage(thumbnail) }} />
     </Container>
 );
 
 Slide.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    desc: PropTypes.string,isRequired,
-    url: PropTypes.string,
-    thumbnail: PropTypes.string.isRequired
-
+    desc: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    uploadDate: PropTypes.string.isRequired
 };
 
 export default Slide;
