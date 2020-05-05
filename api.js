@@ -21,4 +21,10 @@ export const lectureApi = {
     psat: () => getAnything("/lecture/psat"),
     ncsDetail: id => getAnything(`/lecture/ncs/${id}`),
     psatDetail: id => getAnything(`/lecture/psat/${id}`)
-}
+};
+
+export const noticeApi = {
+    notice: () => getAnything("/notice"),
+    noticeDetail: id => getAnything(`/notice/${id}`)
+};
+
