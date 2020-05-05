@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import Poster from "./Poster";
+import {TouchableOpacity} from "react-native";
 import {apiImage} from "../../api";
-
 
 const Container = styled.View`
     width: 100%;
@@ -12,36 +13,68 @@ const Container = styled.View`
 const BG = styled.Image`
     width: 100%;
     height: 100%;
-    opacity: 0.6;
+    opacity: 0.4;
     position: absolute;
 `;
 
 const Content = styled.View`
+    height: 100%;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 `;
 
 const Data = styled.View`
     width: 50%;
+    align-items: flex-start;
 `;
 
 const Title = styled.Text`
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
+    margin-bottom: 10px;
 `;
 
 const Desc = styled.Text`
-    color: white;
-    opacity: 0.7;
+    color: rgb(220, 220, 220);
+    font-size: 14px;
+    font-weight: 500;
 `;
 
-const Slide = ({id, title, desc, url, thumbnail, uploadDate}) => (
+const Button = styled.View`
+    margin-top: 10px;
+    background-color: #e74c3c;
+    padding: 10px;
+    border-radius: 3px;
+`;
+
+const ButtonText = styled.Text`
+    color: white;
+`;
+
+const TagItem = styled.Text`
+    color: white;
+`;
+
+const Slide = ({id, title, desc, url, thumbnail, uploadDate, tag}) => (
     <Container>
         <BG source={{ url: apiImage(thumbnail) }} />
         <Content>
+            <Poster url={apiImage(thumbnail)}/>
             <Data>
-                <Title>{title}</Title>
-                <Desc>{desc}</Desc>
+                <Title>{title.slice(0, 30)}</Title>
+                {/* {tag.map((item, index) => {
+                    <TagItem key={index}>
+                        {item}
+                    </TagItem>
+                })} */}
+                <Desc>{desc.slice(0, 120)}</Desc>
+                <TouchableOpacity>
+                    <Button>
+                        <ButtonText>View Detail</ButtonText>
+                    </Button>
+                </TouchableOpacity>
             </Data>
         </Content>
     </Container>
@@ -51,6 +84,7 @@ Slide.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
+    tag: PropTypes.array,
     thumbnail: PropTypes.string.isRequired,
     uploadDate: PropTypes.string.isRequired
 };
