@@ -28,3 +28,4 @@ export const noticeApi = {
     noticeDetail: id => getAnything(`/notice/${id}`)
 };
 
+export const apiImage = path => `http://localhost:7000/${path}`;
