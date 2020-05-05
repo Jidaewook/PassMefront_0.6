@@ -4,6 +4,7 @@ import Swiper from "react-native-web-swiper";
 import { ActivityIndicator, ScrollView, Dimensions } from "react-native";
 import Slide from '../../components/Home/Slide';
 import Title from '../../components/Home/Title';
+import Vertical from "../../components/Vertical";
 
 const {width: WIDTH, height: HEIGHT} = Dimensions.get("window");
 
@@ -49,6 +50,15 @@ export default ({loading, psat}) => (
                 </SliderContainer>    
                 <Container>
                     <Title title={"PSAT LIST"}/>
+                    <ScrollView horizontal>
+                        {psat.map(item => (
+                            <Vertical 
+                                key={item._id}
+                                thumbnail={item.thumbnail}
+                                title={item.title}
+                            />
+                        ))}
+                    </ScrollView>
                 </Container>
             </>
         )}
