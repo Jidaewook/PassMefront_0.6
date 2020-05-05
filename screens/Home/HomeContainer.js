@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Button} from 'react-native';
 import {lectureApi, noticeApi} from '../../api';
+import HomePresenter from "./HomePresenter";
 
 export default () => {
     // const lectures는 빈공간이고, setLectures로 그 안을 채우는 것
@@ -11,7 +12,8 @@ export default () => {
         notice: [],
         ncsError: null,
         psatError: null,
-        noticeError: null
+        noticeError: null,
+        loading: true
     });
 
     const getData = async () => {
@@ -25,7 +27,8 @@ export default () => {
             psat,
             psatError,
             notice,
-            noticeError
+            noticeError,
+            loading: false
         });
         
     };
@@ -34,19 +37,7 @@ export default () => {
         getData();
     }, []);
 
-    return (
-        <View style={{flex: 1, backgroundColor: "black"}}>
-            <Text style={{color: "white"}}>
-                ncsCount is : {lecures.ncs?.length}
-            </Text>
-            <Text style={{color: "white"}}>
-                psatCount is : {lecures.psat?.length}
-            </Text>
-            <Text style={{color: "white"}}>
-                noticeCount is : {lecures.notice?.length}
-            </Text>
-        </View>
-    )
+    return <HomePresenter />;
 };
 
 
