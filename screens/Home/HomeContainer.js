@@ -6,7 +6,7 @@ import HomePresenter from "./HomePresenter";
 export default () => {
     // const lectures는 빈공간이고, setLectures로 그 안을 채우는 것
     // const notices를 추가하려면, setNotices로 별도 작업으로 그 안을 채우면 된다. 
-    const [lecures, setLectures] = useState({
+    const [lectures, setLectures] = useState({
         ncs: [],
         psat: [],
         notice: [],
@@ -37,7 +37,7 @@ export default () => {
         getData();
     }, []);
 
-    return <HomePresenter />;
+    return <HomePresenter {...lectures} />;
 };
 
 

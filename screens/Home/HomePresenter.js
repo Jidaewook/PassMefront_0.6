@@ -1,9 +1,15 @@
 import React from 'react'
-import styled from "styled-components";
+import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { Dimensions } from "react-native";
+import { Dimensions, ActivityIndicator } from "react-native";
 
 const {width, height} = Dimensions.get("screen");
+
+const Container = styled.View`
+    flex: 1;
+    background-color: black;
+    justify-content: center;
+`;
 
 const Header = styled.View`
     width: 100%;
@@ -17,24 +23,23 @@ const Section = styled.View`
 
 const Text = styled.Text``;
 
-export default () => (
-    <Header>
-        <Swiper>
-            <Section>
-                <Text>
-                    Hello
-                </Text>
-            </Section>
-            <Section>
-                <Text>
-                    Hello
-                </Text>
-            </Section>
-            <Section>
-                <Text>
-                    Hello
-                </Text>
-            </Section>
-        </Swiper>
-    </Header>
+export default ({loading, psat}) => (
+    <Container>
+        {loading ? (
+            <ActivityIndicator color="white" size="large" />
+        ): (
+            <Header>
+                <Swiper controlsEnabled={false} loop timeout={3}>
+                    {psat.map(item => (
+                        // item은 psatInfo의 하위항목을 받아야 한다. 
+                        <Section key={item._id}>
+                            <Text>{item.title}</Text>
+                        </Section>
+                    ))}
+                </Swiper>
+            </Header>
+        )}
+
+    </Container>
+
 );
