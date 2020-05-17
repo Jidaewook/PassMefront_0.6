@@ -19,7 +19,7 @@ const SliderContainer = styled.View`
 `;
 
 
-export default ({loading, psat}) => (
+export default ({loading, psat, ncs}) => (
     <ScrollView
         style={{
             backgroundColor: "black"
@@ -49,20 +49,41 @@ export default ({loading, psat}) => (
                     </Swiper>
                 </SliderContainer>    
                 <Container>
-                    <Title title={"PSAT LIST"}/>
+                <Title title={"NCS LIST"} />
                     <ScrollView horizontal>
+                        {ncs.map(item => (
+                            <Vertical 
+                                key={item._id}
+                                thumbnail={item.thumbnail}
+                                title={item.title}
+                                likes={item.likes}
+                                comments={item.comments}
+                            />
+                        ))}
+                    </ScrollView>
+                    <Title title={"PSAT LIST"}/>
+                    <ScrollView 
+                        style={{ marginTop: 20}} 
+                        contentContainerStyle={{paddingLeft: 30}}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                    >
                         {psat.map(item => (
                             <Vertical 
                                 key={item._id}
                                 thumbnail={item.thumbnail}
                                 title={item.title}
+                                likes={item.likes}
+                                comments={item.comments}
                             />
                         ))}
                     </ScrollView>
+                    
                 </Container>
+                
             </>
         )}
 
     </ScrollView>
-
+    
 );
