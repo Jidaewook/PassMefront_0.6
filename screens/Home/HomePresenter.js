@@ -5,6 +5,7 @@ import { ActivityIndicator, ScrollView, Dimensions } from "react-native";
 import Slide from '../../components/Home/Slide';
 import Title from '../../components/Home/Title';
 import Vertical from "../../components/Vertical";
+import Horizontal from "../../components/Horizontal";
 
 const {width: WIDTH, height: HEIGHT} = Dimensions.get("window");
 
@@ -13,7 +14,7 @@ const Container = styled.View`
 `;
 
 const SliderContainer = styled.View`
-    width: ${WIDTH}px;
+    width: 100%;
     height: ${HEIGHT / 4}px;
     margin-bottom: 30px;
 `;
@@ -21,12 +22,9 @@ const SliderContainer = styled.View`
 
 export default ({loading, psat, ncs}) => (
     <ScrollView
-        style={{
-            backgroundColor: "black"
-        }}
-
+        style={{ backgroundColor: "black" }}
         contentContainerStyle={{
-            flex: 1,
+            flex: loading ? 1 : "auto",
             justifyContent: loading ? "center" : "flex-start"
         }}
     >
@@ -50,7 +48,13 @@ export default ({loading, psat, ncs}) => (
                 </SliderContainer>    
                 <Container>
                 <Title title={"NCS LIST"} />
-                    <ScrollView horizontal>
+                    <ScrollView 
+                        style={{marginTop: 20}}
+                        contentContainerStyle={{ paddingLeft: 30}}
+                        horizontal 
+                        showsHorizontalScrollIndicator={false}  
+                            
+                    >
                         {ncs.map(item => (
                             <Vertical 
                                 key={item._id}
@@ -62,9 +66,9 @@ export default ({loading, psat, ncs}) => (
                         ))}
                     </ScrollView>
                     <Title title={"PSAT LIST"}/>
-                    <ScrollView 
-                        style={{ marginTop: 20}} 
-                        contentContainerStyle={{paddingLeft: 30}}
+                    <ScrollView
+                        style={{ marginTop: 20, marginBottom: 40 }}
+                        contentContainerStyle={{ paddingLeft: 30 }}
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
@@ -78,6 +82,18 @@ export default ({loading, psat, ncs}) => (
                             />
                         ))}
                     </ScrollView>
+                    <Title title={"NOTICE"}/>
+                    {psat.map(item => (
+                        <Horizontal 
+                            key={item._id}
+                            releaseDate={item.createdAt}
+                            thumbnail={item.thumbnail}
+                            title={item.title}
+                            desc={item.desc}
+                            likes={item.likes}
+                            comments={item.comments}
+                        />
+                    ))}
                     
                 </Container>
                 

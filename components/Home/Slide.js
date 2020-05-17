@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Poster from "./Poster";
 import {TouchableOpacity} from "react-native";
 import {apiImage} from "../../api";
+import {trimText, formDate} from "../../Utils";
 
 const Container = styled.View`
     width: 100%;
@@ -57,18 +58,26 @@ const TagItem = styled.Text`
     color: white;
 `;
 
+const UploadDate = styled.Text`
+    color: white;
+    font-size: 12px;
+    margin-bottom: 5px;
+`;
+
+
 const Slide = ({id, title, desc, url, thumbnail, uploadDate, tag}) => (
     <Container>
         <BG source={{ url: apiImage(thumbnail) }} />
         <Content>
             <Poster url={apiImage(thumbnail)}/>
             <Data>
-                <Title>{title.length > 40 ? `${title.slice(0, 40)}...` : title}</Title>
+                <Title>{trimText(title, 10)}</Title>
                 {/* {tag.map((item, index) => {
                     <TagItem key={index}>
                         {item}
                     </TagItem>
                 })} */}
+                {uploadDate ? <UploadDate>등록일: {formDate(uploadDate)}</UploadDate> : null}
                 <Desc>{desc.slice(0, 120)}</Desc>
                 <TouchableOpacity>
                     <Button>

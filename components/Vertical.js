@@ -6,6 +6,7 @@ import { apiImage } from "../api";
 import {TouchableOpacity} from "react-native";
 import Likes from "./Likes";
 import Comments from "./Comments";
+import {trimText, formDate} from '../Utils';
 
 const Container = styled.View`
     align-items: center;
@@ -35,10 +36,10 @@ const Data = styled.View`
 //     color: white;
 // `;
 
-const Vertical = ({thumbnail, title, likes, comments}) => (
+const Vertical = ({id, thumbnail, title, likes, comments}) => (
     <Container>
         <Poster url={apiImage(thumbnail)}/>
-        <Title>{title.length > 10 ? `${title.slice(0, 10)}...` : title}</Title>
+        <Title>{trimText(title, 10)}</Title>
         <Data>
             <Likes likes={likes.length}/>
             <Comments comments={comments.length}/>
@@ -47,6 +48,7 @@ const Vertical = ({thumbnail, title, likes, comments}) => (
 );
 
 Vertical.propTypes = {
+    id: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     likes: PropTypes.array,
