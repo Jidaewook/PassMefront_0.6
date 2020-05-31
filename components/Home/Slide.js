@@ -3,8 +3,10 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Poster from "./Poster";
 import {TouchableOpacity} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 import {apiImage} from "../../api";
 import {trimText, formDate} from "../../Utils";
+
 
 const Container = styled.View`
     width: 100%;
@@ -65,29 +67,46 @@ const UploadDate = styled.Text`
 `;
 
 
-const Slide = ({id, title, desc, url, thumbnail, uploadDate, tag}) => (
-    <Container>
-        <BG source={{ url: apiImage(thumbnail) }} />
-        <Content>
-            <Poster url={apiImage(thumbnail)}/>
-            <Data>
-                <Title>{trimText(title, 10)}</Title>
-                {/* {tag.map((item, index) => {
-                    <TagItem key={index}>
-                        {item}
-                    </TagItem>
-                })} */}
-                {uploadDate ? <UploadDate>등록일: {formDate(uploadDate)}</UploadDate> : null}
-                <Desc>{desc.slice(0, 120)}</Desc>
-                <TouchableOpacity>
-                    <Button>
-                        <ButtonText>View Details</ButtonText>
-                    </Button>
-                </TouchableOpacity>
-            </Data>
-        </Content>
-    </Container>
-);
+const Slide = ({id, title, desc, url, thumbnail, uploadDate, tag}) => {
+
+    const navigation = useNavigation();
+    const goToDetail = () => 
+        navigation.navigate("Detail", {
+            id,
+            title,
+            thumbnail, 
+            desc,
+            url,
+            uploadDate,
+            tag
+        });
+    
+    return (
+        <Container> 
+            <BG source={{ url: apiImage(thumbnail) }} />
+            <Content>
+                <Poster url={apiImage(thumbnail)}/>
+                <Data>
+                    <Title>{trimText(title, 10)}</Title>
+                    {/* {tag.map((item, index) => {
+                        <TagItem key={index}>
+                            {item}
+                        </TagItem>
+                    })} */}
+                    {uploadDate ? <UploadDate>등록일: {formDate(uploadDate)}</UploadDate> : null}
+                    <Desc>{desc.slice(0, 120)}</Desc>
+                    <TouchableOpacity onPress={goToDetail}>
+                        <Button>
+                            <ButtonText>View Details</ButtonText>
+                        </Button>
+                    </TouchableOpacity>
+                </Data>
+            </Content>
+        </Container>
+    )
+
+    
+};
 
 Slide.propTypes = {
     id: PropTypes.string.isRequired,

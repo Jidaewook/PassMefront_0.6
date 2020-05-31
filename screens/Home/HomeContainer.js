@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Button} from 'react-native';
-import {lectureApi, noticeApi} from '../../api';
+import {lectureApi, noticeApi, bbsApi} from '../../api';
 import HomePresenter from "./HomePresenter";
 
 export default () => {
@@ -10,9 +10,11 @@ export default () => {
         ncs: [],
         psat: [],
         notice: [],
+        bbs: [],
         ncsError: null,
         psatError: null,
         noticeError: null,
+        bbsError: null,
         loading: true
     });
 
@@ -20,6 +22,7 @@ export default () => {
         const [ncs, ncsError] = await lectureApi.ncs();
         const [psat, psatError] = await lectureApi.psat();
         const [notice, noticeError] = await noticeApi.notice();
+        const [bbs, bbsError] = await bbsApi.bbs();
 
         setLectures({
             ncs,
@@ -28,9 +31,10 @@ export default () => {
             psatError,
             notice,
             noticeError,
+            bbs,
+            bbsError,
             loading: false
         });
-        
     };
 
     useEffect(() => {

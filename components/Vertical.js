@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Poster from "./Home/Poster";
 import { apiImage } from "../api";
 import {TouchableOpacity} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 import Likes from "./Likes";
 import Comments from "./Comments";
 import {trimText, formDate} from '../Utils';
@@ -36,16 +37,33 @@ const Data = styled.View`
 //     color: white;
 // `;
 
-const Vertical = ({id, thumbnail, title, likes, comments}) => (
-    <Container>
-        <Poster url={apiImage(thumbnail)}/>
-        <Title>{trimText(title, 10)}</Title>
-        <Data>
-            <Likes likes={likes.length}/>
-            <Comments comments={comments.length}/>
-        </Data>
-    </Container>
-);
+const Vertical = ({id, thumbnail, title, likes, comments}) => {
+    
+    const navigation = useNavigation();
+    const goToDetail = () => 
+        navigation.navigate("Detail", {
+            id,
+            thumbnail,
+            title,
+            likes, 
+            comments
+        });
+
+    return (
+        <TouchableOpacity onPress={goToDetail}>
+            <Container>
+                <Poster url={apiImage(thumbnail)}/>
+                <Title>{trimText(title, 10)}</Title>
+                <Data>
+                    <Likes likes={likes.length}/>
+                    <Comments comments={comments.length}/>
+                </Data>
+            </Container>
+        </TouchableOpacity>
+    );
+    
+    
+};
 
 Vertical.propTypes = {
     id: PropTypes.string.isRequired,

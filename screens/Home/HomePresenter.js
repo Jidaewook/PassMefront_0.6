@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { ActivityIndicator, ScrollView, Dimensions } from "react-native";
+import { ActivityIndicator, ScrollView, Dimensions, Text, View } from "react-native";
 import Slide from '../../components/Home/Slide';
 import Title from '../../components/Home/Title';
 import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
+import Card from "../../components/Home/Card";
+
 
 const {width: WIDTH, height: HEIGHT} = Dimensions.get("window");
 
@@ -19,8 +21,15 @@ const SliderContainer = styled.View`
     margin-bottom: 30px;
 `;
 
+const CardContainer = styled.View`
+    align-items: center;
+    flex-direction: row;
+    background-Color: white;
+    
+`;
 
-export default ({loading, psat, ncs}) => (
+
+export default ({loading, psat, ncs, bbs}) => (
     <ScrollView
         style={{ backgroundColor: "black" }}
         contentContainerStyle={{
@@ -82,21 +91,25 @@ export default ({loading, psat, ncs}) => (
                             />
                         ))}
                     </ScrollView>
-                    <Title title={"NOTICE"}/>
-                    {psat.map(item => (
-                        <Horizontal 
-                            key={item._id}
-                            releaseDate={item.createdAt}
-                            thumbnail={item.thumbnail}
-                            title={item.title}
-                            desc={item.desc}
-                            likes={item.likes}
-                            comments={item.comments}
-                        />
-                    ))}
+                    
                     
                 </Container>
-                
+                <Title title={"BBS"}/>
+                    {bbs.map(item => (
+                        
+                        <CardContainer
+                            
+                        >
+                            <Card 
+                                key={item._id}
+                                id={item._id}
+                                title={item.title}
+                                likes={item.likes}
+                                comments={item.comments}
+                            />
+                        </CardContainer>
+                        
+                    ))}
             </>
         )}
 

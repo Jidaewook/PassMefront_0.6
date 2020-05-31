@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import {TouchableOpacity} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 import Poster from './Home/Poster';
 import Likes from './Likes';
 import Comments from './Comments';
@@ -43,23 +45,42 @@ const ReleaseDate = styled.Text`
     font-size: 12px;
 `;
 
-const Horizontal = ({id, releaseDate, thumbnail, title, desc, likes, comments}) => (
-    <Container>
-        <Poster url={apiImage(thumbnail)}/>
-        <Data>
-            <Title>{trimText(title, 15)}</Title>
-            {releaseDate ? (
-                <ReleaseDate>등록일: {formDate(releaseDate)}</ReleaseDate>
-            ) : null }
-            <Desc>{trimText(desc, 50)}</Desc>
-            <Data2>
-                <Likes likes={likes.length}/>
-                <Comments comments={comments.length}/>
-            </Data2>
-        </Data>
-        
-    </Container>
-);
+const Horizontal = ({id, releaseDate, thumbnail, title, desc, likes, comments}) => {
+
+    const navigation = useNavigation();
+    const goToDetail = () => 
+        navigation.navigate("Detail", {
+            id, 
+            releaseDate, 
+            thumbnail,
+            title,
+            desc,
+            likes,
+            comments
+        });
+
+    return (
+        <TouchableOpacity onPress={goToDetail}>
+            <Container>
+                <Poster url={apiImage(thumbnail)}/>
+                <Data>
+                    <Title>{trimText(title, 15)}</Title>
+                    {releaseDate ? (
+                        <ReleaseDate>등록일: {formDate(releaseDate)}</ReleaseDate>
+                    ) : null }
+                    <Desc>{trimText(desc, 50)}</Desc>
+                    <Data2>
+                        <Likes likes={likes.length}/>
+                        <Comments comments={comments.length}/>
+                    </Data2>
+                </Data>
+                
+            </Container>
+        </TouchableOpacity>
+    );
+
+    
+};
 
 Horizontal.propTypes = {
     id: PropTypes.string.isRequired,

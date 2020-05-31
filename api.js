@@ -28,4 +28,10 @@ export const noticeApi = {
     noticeDetail: id => getAnything(`/notice/${id}`)
 };
 
+export const bbsApi = {
+    bbs: () => getAnything("/bbs"),
+    bbsDetail: id => getAnything(`/bbs/${id}`)
+};
+
+
 export const apiImage = path => `http://localhost:7000/${path}`;
