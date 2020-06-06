@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const makeRequest = (path) => 
-    axios.get(`http://localhost:7000${path}`);
+    axios.get(`https://pure-retreat-35508.herokuapp.com${path}`);
 
 const getAnything = async (path, params = {}) => {
     try{
@@ -34,4 +34,4 @@ export const bbsApi = {
 };
 
 
-export const apiImage = path => `http://localhost:7000/${path}`;
+export const apiImage = path => `https://pure-retreat-35508.herokuapp.com/${path}`;

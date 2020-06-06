@@ -62,7 +62,7 @@ const Horizontal = ({id, releaseDate, thumbnail, title, desc, likes, comments}) 
     return (
         <TouchableOpacity onPress={goToDetail}>
             <Container>
-                <Poster url={apiImage(thumbnail)}/>
+                <Poster url={require('../assets/emptyimage.png')}/>
                 <Data>
                     <Title>{trimText(title, 15)}</Title>
                     {releaseDate ? (

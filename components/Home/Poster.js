@@ -8,7 +8,7 @@ const Image = styled.Image`
     border-radius: 4px;
 `;
 
-const Poster = ({url}) => <Image source={{url: url}} />;
+const Poster = ({url}) => <Image source={require('../../assets/emptyimage.png')} />;
 
 Poster.propTypes = {
     url: PropTypes.string.isRequired
