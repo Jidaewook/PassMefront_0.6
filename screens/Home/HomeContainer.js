@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Button} from 'react-native';
 import {lectureApi, noticeApi, bbsApi} from '../../api';
 import HomePresenter from "./HomePresenter";
+import Header from '../../components/Sidebar/Route/Header';
 
 export default () => {
     // const lectures는 빈공간이고, setLectures로 그 안을 채우는 것

@@ -33,5 +33,9 @@ export const bbsApi = {
     bbsDetail: id => getAnything(`/bbs/${id}`)
 };
 
+export const pageApi = {
+    page: () => getAnything("/page"),
+    pageDetail: id => getAnything(`/mypage/${id}`)
+};
 
 export const apiImage = path => `https://pure-retreat-35508.herokuapp.com/${path}`;

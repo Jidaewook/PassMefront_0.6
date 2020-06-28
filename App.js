@@ -6,8 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import {Asset} from 'expo-asset';
 import { Ionicons } from '@expo/vector-icons';
 import Stack from './navigation/Stack';
-import Sidebar from './screens/sidebar';
-// import './App.css';
+import DrawNavigator from './navigation/DrawNavigator';
+
 
 //무조건 초기 설정에서 해줘야 하는 사항
 const cacheImage = images => 
@@ -20,21 +20,7 @@ const cacheImage = images =>
   });
 
 const cacheFonts = fonts => 
-  fonts.map(font => [Font.loadAsync(font), Font.loadAsync(font)]);
-
-
-//  sidebarmenu
-// export default function App() {
-//   return(
-//     <div id="App">
-//       <sidebar />
-//       <div id="page-wrap">
-//         <h1>AppDividend</h1>
-//         <h2>Check out our tutorials the side menubar</h2>
-//       </div>
-//     </div>
-//   );
-// }
+  fonts.map(font => [Font.loadAsync(font)]);
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -50,7 +36,7 @@ export default function App() {
   return isReady ? (
     <>
       <NavigationContainer>
-        <Stack />
+        <DrawNavigator />
       </NavigationContainer>
       <StatusBar barStyle="light-content" />
     </>

@@ -9,6 +9,7 @@ import Horizontal from "../../components/Horizontal";
 import Card from "../../components/Home/Card";
 
 
+
 const {width: WIDTH, height: HEIGHT} = Dimensions.get("window");
 
 const Container = styled.View`
@@ -30,7 +31,8 @@ const CardContainer = styled.View`
 
 
 export default ({loading, psat, ncs, bbs}) => (
-    <ScrollView
+    <>
+        <ScrollView
         style={{ backgroundColor: "black" }}
         contentContainerStyle={{
             flex: loading ? 1 : "auto",
@@ -114,5 +116,6 @@ export default ({loading, psat, ncs, bbs}) => (
         )}
 
     </ScrollView>
+    </>
     
 );
