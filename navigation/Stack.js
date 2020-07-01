@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import Tabs from "../navigation/Tabs";
 import Detail from "../screens/Detail";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const Stack = createStackNavigator();
@@ -40,8 +41,8 @@ export default () => (
             component={Tabs}
             options={{
                 title: "Hamburger", 
-                drawerIcon: () => (
-                <Image source={require("../assets/icon.png")} size={32} />
+                headerLeft: () => (
+                    <Icon.Button name="ios-menu" size={25} backgroundColor="#9AC4F8" onPress={() => navigation.openDrawer()}></Icon.Button>
           )
             }}
         />
